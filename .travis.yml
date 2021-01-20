@@ -35,7 +35,13 @@ cache:
 
 before_install:
   - lscpu
-  - export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-${TRAVIS_CPU_ARCH}/"
+  - |
+    if [[ "$TRAVIS_CPU_ARCH" != "ppc64le" ]]; then
+     export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-${TRAVIS_CPU_ARCH}/"
+    else
+     export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-ppc64el/"
+     export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8  # To fix the unmappable character 
+    fi
   - export PATH="$JAVA_HOME/bin:$PATH"
   - java -version
   - ant -version
