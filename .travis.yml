@@ -21,6 +21,7 @@ dist: focal
 arch:
   - amd64
   - arm64
+  - ppc64le
 
 addons:
   apt:
